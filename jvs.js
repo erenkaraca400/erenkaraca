@@ -59,3 +59,49 @@ function removeItem(index) {
 
 // Sayfa yüklendiğinde çalıştır
 renderInventory();
+let inventory = [];
+
+function addNewItem() {
+    const nameInput = document.getElementById('p-name');
+    const qtyInput = document.getElementById('p-qty');
+    const fileInput = document.getElementById('p-img-file');
+
+    const name = nameInput.value;
+    const qty = qtyInput.value;
+    const file = fileInput.files[0]; // Seçilen ilk dosyayı al
+
+    if (name && qty) {
+        // Eğer bir resim seçildiyse onu işle
+        if (file) {
+            const reader = new FileReader();
+            
+            // Dosya okunduğunda çalışacak fonksiyon
+            reader.onload = function(e) {
+                const imgBase64 = e.target.result; // Resmin verisi
+                saveItem(name, qty, imgBase64);
+            };
+            
+            reader.readAsDataURL(file); // Dosyayı oku
+        } else {
+            // Resim seçilmediyse varsayılan bir görsel koy
+            saveItem(name, qty, "https://via.placeholder.com/50");
+        }
+        
+        // Formu temizle
+        nameInput.value = "";
+        qtyInput.value = "";
+        fileInput.value = "";
+    } else {
+        alert("Lütfen isim ve miktar giriniz!");
+    }
+}
+
+// Ürünü listeye kaydeden yardımcı fonksiyon
+function saveItem(name, qty, imgSrc) {
+    inventory.push({ 
+        name: name, 
+        qty: parseInt(qty), 
+        img: imgSrc 
+    });
+    renderInventory();
+}
