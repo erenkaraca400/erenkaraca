@@ -1,58 +1,64 @@
-let stockData = [
-    { name: "Espresso Çekirdeği", qty: 12, category: "İçecek" },
-    { name: "Süt", qty: 3, category: "Gıda" }
+let inventory = [
+    { name: "Türk Kahvesi", qty: 20, img: "https://via.placeholder.com/50" },
+    { name: "Süt", qty: 4, img: "https://via.placeholder.com/50" }
 ];
 
-function updateTable() {
-    const tableBody = document.getElementById('table-body');
-    const totalItemsText = document.getElementById('total-items');
-    const lowStockText = document.getElementById('low-stock-count');
+function renderInventory(data = inventory) {
+    const list = document.getElementById('stock-list');
+    const totalMsg = document.getElementById('total-count');
+    const lowMsg = document.getElementById('low-stock-count');
     
-    tableBody.innerHTML = "";
-    let lowStockCount = 0;
+    list.innerHTML = "";
+    let lowCount = 0;
 
-    stockData.forEach((item, index) => {
-        const isLow = item.qty < 5;
-        if(isLow) lowStockCount++;
-
-        const row = `
+    data.forEach((item, index) => {
+        if(item.qty < 5) lowCount++;
+        
+        list.innerHTML += `
             <tr>
+                <td><img src="${item.img}" class="product-img"></td>
                 <td>${item.name}</td>
-                <td>${item.category}</td>
-                <td>${item.qty}</td>
-                <td class="${isLow ? 'status-low' : 'status-ok'}">
-                    ${isLow ? '⚠️ Düşük Stok' : '✅ Yeterli'}
+                <td>${item.qty} adet</td>
+                <td class="${item.qty < 5 ? 'low-alert' : ''}">
+                    ${item.qty < 5 ? '⚠️ Kritik' : '✅ Tamam'}
                 </td>
-                <td><button class="delete-btn" onclick="deleteItem(${index})">Sil</button></td>
+                <td><button onclick="removeItem(${index})" style="background:#ff4d4d">Sil</button></td>
             </tr>
         `;
-        tableBody.innerHTML += row;
     });
 
-    totalItemsText.innerText = stockData.length;
-    lowStockText.innerText = lowStockCount;
+    totalMsg.innerText = inventory.length;
+    lowMsg.innerText = lowCount;
 }
 
-function addItem() {
-    const name = document.getElementById('item-name').value;
-    const qty = parseInt(document.getElementById('item-qty').value);
-    const category = document.getElementById('item-category').value;
+// Yeni Ürün Ekleme
+function addNewItem() {
+    const name = document.getElementById('p-name').value;
+    const qty = document.getElementById('p-qty').value;
+    const img = document.getElementById('p-img').value || "https://via.placeholder.com/50";
 
-    if(name && qty >= 0) {
-        stockData.push({ name, qty, category });
-        updateTable();
-        // Formu temizle
-        document.getElementById('item-name').value = "";
-        document.getElementById('item-qty').value = "";
-    } else {
-        alert("Lütfen geçerli bir isim ve miktar girin!");
+    if(name && qty) {
+        inventory.push({ name, qty: parseInt(qty), img });
+        renderInventory();
+        document.getElementById('p-name').value = "";
+        document.getElementById('p-qty').value = "";
+        document.getElementById('p-img').value = "";
     }
 }
 
-function deleteItem(index) {
-    stockData.splice(index, 1);
-    updateTable();
+// Arama Fonksiyonu
+function filterItems() {
+    const term = document.getElementById('search-input').value.toLowerCase();
+    const filtered = inventory.filter(item => 
+        item.name.toLowerCase().includes(term)
+    );
+    renderInventory(filtered);
 }
 
-// İlk açılışta tabloyu yükle
-updateTable();
+function removeItem(index) {
+    inventory.splice(index, 1);
+    renderInventory();
+}
+
+// Sayfa yüklendiğinde çalıştır
+renderInventory();
