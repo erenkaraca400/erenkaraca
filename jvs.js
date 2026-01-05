@@ -37,7 +37,7 @@ function renderInventory(dataToRender = inventory) {
     tableBody.innerHTML += row;
 }); 
 
-   // Stok 3 den fazla ise  yeterli say
+   // Stok 3 den fazla ise  yeterli saycan
     const isLow = item.qty < 3;
     if (isLow) lowCount++;
 
