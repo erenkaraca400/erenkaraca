@@ -3,50 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akıllı Kafe Stok Paneli</title>
+    <title>Akıllı Kafe | Stok Paneli</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>☕ Akıllı Kafe Stok Paneli</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Stoklarda ürün ara..." onkeyup="filterItems()">
+            </div>
         </header>
 
         <div class="stats-container">
             <div class="card">
                 <h3>Toplam Ürün</h3>
-                <p id="total-items">0</p>
+                <p id="total-count">0</p>
             </div>
             <div class="card warning">
-                <h3>Kritik Stok</h3>
+                <h3>Düşük Stok</h3>
                 <p id="low-stock-count">0</p>
             </div>
         </div>
 
-        <section class="add-item">
-            <input type="text" id="item-name" placeholder="Ürün Adı (örn: Süt)">
-            <input type="number" id="item-qty" placeholder="Miktar">
-            <select id="item-category">
-                <option value="İçecek">İçecek</option>
-                <option value="Gıda">Gıda</option>
-                <option value="Sarf Malzeme">Sarf Malzeme</option>
-            </select>
-            <button onclick="addItem()">Ekle</button>
+        <section class="add-section">
+            <h3>Yeni Ürün Kaydı</h3>
+            <div class="form-group">
+                <input type="text" id="p-name" placeholder="Ürün Adı">
+                <input type="number" id="p-qty" placeholder="Miktar">
+                <input type="text" id="p-img" placeholder="Resim URL (Link yapıştırın)">
+                <button onclick="addNewItem()">Ekle</button>
+            </div>
         </section>
 
-        <table id="stock-table">
-            <thead>
-                <tr>
-                    <th>Ürün</th>
-                    <th>Kategori</th>
-                    <th>Miktar</th>
-                    <th>Durum</th>
-                    <th>İşlem</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                </tbody>
-        </table>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Görsel</th>
+                        <th>Ürün Adı</th>
+                        <th>Miktar</th>
+                        <th>Durum</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody id="stock-list">
+                    </tbody>
+            </table>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
