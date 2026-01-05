@@ -35,7 +35,32 @@ function renderInventory(dataToRender = inventory) {
         </tr>
     `;
     tableBody.innerHTML += row;
+}); 
+
+   // Stok 3 den fazla ise  yeterli say
+    const isLow = item.qty < 3;
+    if (isLow) lowCount++;
+
+    // isLow true ise 'critical-row' sınıfını ekle, değilse boş bırak
+    const row = `
+        <tr class="${isLow ? 'critical-row' : ''}">
+            <td><img src="${item.img}" class="product-img" alt="ürün"></td>
+            <td><strong>${item.name}</strong></td>
+            <td>${item.qty} Adet</td>
+            <td>
+                <span class="status-badge ${isLow ? 'low-alert' : 'ok-status'}">
+                    ${isLow ? '⚠️ Kritik' : '✅ Yeterli'}
+                </span>
+            </td>
+            <td>
+                <button onclick="removeItem(${index})" class="delete-btn">Sil</button>
+            </td>
+        </tr>
+    `;
+    tableBody.innerHTML += row;
 });
+
+
 
     // İstatistikleri güncelle
     totalCount.innerText = inventory.length;
