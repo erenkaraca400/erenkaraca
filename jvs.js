@@ -49,7 +49,7 @@ function renderInventory(dataToRender = inventory) {
             <td>${item.qty} Adet</td>
             <td>
                 <span class="status-badge ${isLow ? 'low-alert' : 'ok-status'}">
-                    ${isLow ? '⚠️ Kritik' : '✅ Yeterli'}
+                    ${isLow ? '✅ Yeterli' : '⚠️ Kritik'} 
                 </span>
             </td>
             <td>
@@ -58,14 +58,14 @@ function renderInventory(dataToRender = inventory) {
         </tr>
     `;
     tableBody.innerHTML += row;
-});
+}
 
 
 
     // İstatistikleri güncelle
     totalCount.innerText = inventory.length;
     lowStockCount.innerText = lowCount;
-}
+
 
 /**
  * Yeni Ürün Ekleme Fonksiyonu
