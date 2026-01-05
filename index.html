@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akıllı Kafe Stok Paneli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☕ Akıllı Kafe Stok Paneli</h1>
+        </header>
+
+        <div class="stats-container">
+            <div class="card">
+                <h3>Toplam Ürün</h3>
+                <p id="total-items">0</p>
+            </div>
+            <div class="card warning">
+                <h3>Kritik Stok</h3>
+                <p id="low-stock-count">0</p>
+            </div>
+        </div>
+
+        <section class="add-item">
+            <input type="text" id="item-name" placeholder="Ürün Adı (örn: Süt)">
+            <input type="number" id="item-qty" placeholder="Miktar">
+            <select id="item-category">
+                <option value="İçecek">İçecek</option>
+                <option value="Gıda">Gıda</option>
+                <option value="Sarf Malzeme">Sarf Malzeme</option>
+            </select>
+            <button onclick="addItem()">Ekle</button>
+        </section>
+
+        <table id="stock-table">
+            <thead>
+                <tr>
+                    <th>Ürün</th>
+                    <th>Kategori</th>
+                    <th>Miktar</th>
+                    <th>Durum</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
