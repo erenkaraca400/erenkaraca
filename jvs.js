@@ -1,7 +1,4 @@
-let inventory = [
-    { name: "Türk Kahvesi", qty: 20, img: "https://via.placeholder.com/50" },
-    { name: "Süt", qty: 4, img: "https://via.placeholder.com/50" }
-];
+
 
 function renderInventory(data = inventory) {
     const list = document.getElementById('stock-list');
