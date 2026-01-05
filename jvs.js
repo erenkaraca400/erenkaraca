@@ -14,8 +14,8 @@ function renderInventory(dataToRender = inventory) {
     let lowCount = 0;
 
     dataToRender.forEach((item, index) => {
-        // Stok 5'in altındaysa kritik say
-        const isLow = item.qty < 5;
+        // Stok 3'in altındaysa kritik say
+        const isLow = item.qty < 3;
         if (isLow) lowCount++;
 
         const row = `
@@ -25,7 +25,7 @@ function renderInventory(dataToRender = inventory) {
                 <td>${item.qty} Adet</td>
                 <td>
                     <span class="status-badge ${isLow ? 'low-alert' : 'ok-status'}">
-                        ${isLow ? '⚠️ Kritik Stok' : '✅ Yeterli'}
+                        ${isLow ? 'bac' : '✅ Yeterli'}
                     </span>
                 </td>
                 <td>
