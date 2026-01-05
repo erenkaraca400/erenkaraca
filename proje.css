@@ -108,3 +108,21 @@ td { padding: 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
 .critical-row strong {
     color: #b91c1c;
 }
+
+
+
+.low-alert { color: green; font-weight: bold; }
+/* Miktarı 3'ten fazla olan satırların stili */
+.critical-row {
+    background-color: #ffeaea !important; /* Hafif kırmızımsı arkaplan */
+    transition: background-color 0.3s ease;
+}
+
+.critical-row td {
+    border-bottom: 1px solid #ffcccc;
+}
+
+/* Eğer istersen yazı rengini de koyulaştırabilirsin */
+.critical-row strong {
+    color: green;
+}
